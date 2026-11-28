@@ -124,7 +124,18 @@ class GameOfLife:
         out : Cells
             Список соседних клеток.
         """
-        pass
+        row, col = cell
+        neighbours = []
+        for i in range(-1, 2):
+            for j in range(-1, 2):
+                if i == 0 and j == 0:
+                    continue
+                new_row = row + i
+                new_col = col + j
+                if new_row >= self.cell_height or new_col >= self.cell_width or new_row < 0 or new_col < 0:
+                    continue
+                neighbours.append(self.grid[new_row][new_col])
+        return neighbours
 
     def get_next_generation(self) -> Grid:
         """
