@@ -30,14 +30,18 @@ class GameOfLife:
         self.speed = speed
 
     def draw_lines(self) -> None:
-        """ Отрисовать сетку """
+        """Отрисовать сетку"""
         for x in range(0, self.width, self.cell_size):
-            pygame.draw.line(self.screen, pygame.Color("black"), (x, 0), (x, self.height))
+            pygame.draw.line(
+                self.screen, pygame.Color("black"), (x, 0), (x, self.height)
+            )
         for y in range(0, self.height, self.cell_size):
-            pygame.draw.line(self.screen, pygame.Color("black"), (0, y), (self.width, y))
+            pygame.draw.line(
+                self.screen, pygame.Color("black"), (0, y), (self.width, y)
+            )
 
     def run(self) -> None:
-        """ Запустить игру """
+        """Запустить игру"""
         pygame.init()
         clock = pygame.time.Clock()
         pygame.display.set_caption("Game of Life")
@@ -81,6 +85,7 @@ class GameOfLife:
             Матрица клеток размером `cell_height` х `cell_width`.
         """
         import random
+
         grid = []
         for i in range(self.cell_height):
             row = []
@@ -100,13 +105,14 @@ class GameOfLife:
             for j in range(self.cell_width):
                 cell = self.grid[i][j]
                 if cell == 1:
-                    color = pygame.Color('green')
+                    color = pygame.Color("green")
                 else:
-                    color = pygame.Color('white')
+                    color = pygame.Color("white")
                 x = j * self.cell_size
                 y = i * self.cell_size
                 rect = x, y, self.cell_size, self.cell_size
                 pygame.draw.rect(self.screen, color, rect)
+
     def get_neighbours(self, cell: Cell) -> Cells:
         """
         Вернуть список соседних клеток для клетки `cell`.
@@ -133,7 +139,12 @@ class GameOfLife:
                     continue
                 new_row = row + i
                 new_col = col + j
-                if new_row >= self.cell_height or new_col >= self.cell_width or new_row < 0 or new_col < 0:
+                if (
+                    new_row >= self.cell_height
+                    or new_col >= self.cell_width
+                    or new_row < 0
+                    or new_col < 0
+                ):
                     continue
                 neighbours.append(self.grid[new_row][new_col])
         return neighbours
@@ -162,6 +173,7 @@ class GameOfLife:
             new_grid.append(row)
         return new_grid
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     game = GameOfLife(320, 240, 20)
     game.run()
