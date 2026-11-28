@@ -55,6 +55,7 @@ class GameOfLife:
 
             # Отрисовка списка клеток
             # Выполнение одного шага игры (обновление состояния ячеек)
+            self.grid = self.get_next_generation()
             self.draw_grid()
 
             pygame.display.flip()
@@ -160,3 +161,7 @@ class GameOfLife:
                     row.append(0)
             new_grid.append(row)
         return new_grid
+
+if __name__ == '__main__':
+    game = GameOfLife(320, 240, 20)
+    game.run()
