@@ -146,4 +146,17 @@ class GameOfLife:
         out : Grid
             Новое поколение клеток.
         """
-        pass
+        new_grid = []
+        for i in range(self.cell_height):
+            row = []
+            for j in range(self.cell_width):
+                neighbours = sum(self.get_neighbours((i, j)))
+                cell = self.grid[i][j]
+                if cell == 1 and neighbours == 2 or cell == 1 and neighbours == 3:
+                    row.append(1)
+                elif cell == 0 and neighbours == 3:
+                    row.append(1)
+                else:
+                    row.append(0)
+            new_grid.append(row)
+        return new_grid
